@@ -1,0 +1,8 @@
+@import '../../styles/colors.scss';
+.content {
+    padding: 8rem 10rem 3rem 10rem;
+    background: linear-gradient(to top, $bg-color, $bg-header 90%);
+    @media(max-width: 720px) {
+        padding: 11rem 2rem 2rem 2rem;
+    }
+}

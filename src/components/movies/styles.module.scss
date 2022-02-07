@@ -1,0 +1,11 @@
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 230px);
+    justify-content: space-between;
+    grid-row-gap: 2rem;
+    grid-column-gap: 0.6rem;
+    @media(max-width: 890px) {
+        justify-content: center;
+        grid-template-columns: 100%;
+    }
+}

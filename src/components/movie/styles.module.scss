@@ -1,0 +1,33 @@
+@import '../../styles/colors';
+.content {
+    display: flex;
+    grid-column-gap: 2rem;
+    justify-content: space-between;
+    overflow: hidden;
+    img {
+        border-radius: 10px;
+        object-fit: cover;
+        @media(max-width: 890px) {
+            width: 100%;
+            height: auto;
+        }
+    }
+    &Details {
+        & p:nth-child(1) {
+            margin-top: 0;
+        }
+        p {
+            margin: 1rem 0 0.3rem 0;
+            font-weight: 200;
+            color: $bg-font;
+            strong {
+                font-weight: 500;
+            }
+        }
+    }
+    @media (max-width:720px) {
+        margin-top: -3rem;
+        flex-direction: column;
+        grid-row-gap: 2rem;
+    }
+}

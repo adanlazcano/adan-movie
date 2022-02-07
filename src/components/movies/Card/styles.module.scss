@@ -1,0 +1,20 @@
+@import '../../../styles/colors';
+.card {
+    color: $bg-font;
+    font-weight: 200;
+    transition: transform 0.4s ease-in-out, opacity 0.6s ease-in-out;
+    opacity: 0.8;
+    img {
+        border-radius: 10px;
+        background-color: azure;
+        object-fit: cover;
+        @media(max-width: 890px) {
+            width: 100%;
+            height: auto;
+        }
+    }
+    &:hover {
+        opacity: 1;
+        transform: scale(1.04);
+    }
+}
