@@ -19,7 +19,7 @@ const Index = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
 
-        {/* <Route path="*" element={<Navigate to="/" />} /> */}
+        {/* <Route path="*" element={<Navigate replace to="/" />} /> */}
       </Routes>
     </Router>
   );

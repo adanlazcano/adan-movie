@@ -1,9 +1,10 @@
 import Movies from 'components/movies'
 import { useDebounce } from 'hooks/useDebounce';
-import { useQuery } from 'hooks/useQuery';
+
+import { useSearchParams } from 'react-router-dom';
 
 const Index = () => {
-  const query = useQuery();
+  const [query] = useSearchParams();
   const search = query.get("search");
 
   const debounceSearch = useDebounce(search,1500);

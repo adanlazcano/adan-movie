@@ -1,13 +1,11 @@
 import styles from "./styles.module.scss";
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "hooks/useQuery";
+import { useSearchParams } from "react-router-dom";
 
 const Index = () => {
-  const navigate = useNavigate();
   const focusRef = useRef();
+  const [query, setQuery] = useSearchParams();
 
-  const query = useQuery();
   const search = query.get("search");
 
   useEffect(
@@ -18,9 +16,7 @@ const Index = () => {
   );
 
   const handleChange = (e) => {
-    navigate({
-      search: e.target.value.length > 0 ? `search=${e.target.value}` : "",
-    });
+    setQuery({ search: e.target.value });
   };
 
   return (
