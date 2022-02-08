@@ -25,20 +25,14 @@
         padding: 0.7rem 1.5rem;
         border-radius: 2rem;
         padding: 0.6rem 1rem;
-        input {
-            outline: none;
-            font-family: inherit;
-            border: none;
-            color: inherit;
-            background-color: transparent;
-            &::placeholder {
-                color: inherit;
-            }
-        }
+        transition: 0.3s ease-in-out;
         &Icon {
             padding-right: 0.5rem;
-            color: $clr-ligth;
+            color: $clr-light;
             font-size: 18px;
+        }
+        &:focus-within {
+            border-color: $clr-light;
         }
     }
 }

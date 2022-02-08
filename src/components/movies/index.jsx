@@ -2,28 +2,55 @@ import styles from "./styles.module.scss";
 import Card from "./Card";
 import { useEffect, useState } from "react";
 import { get } from "API";
-import Loading from 'components/loading'
+import Loading from "components/loading";
+import Empty from "components/empty";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const Index = () => {
-  const [movies, setMovies] = useState(null);
+const Index = ({ search }) => {
+  const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  useEffect((_) => {
-    get("discover/movie").then((movies) => {
-      setMovies(movies.results);
-    });
-  }, []);
+  useEffect(
+    (_) => {
+      const timeId = setTimeout((_) => {
+        setLoading(true);
+        const searchUrl = search
+          ? `search/movie?query=${search}&page=${page}`
+          : `discover/movie?page=${page}`;
 
-  if(!movies){
+        get(searchUrl).then((movies) => {
+          setLoading(false);
+          setMovies((prevMovies) => prevMovies.concat(movies.results));
+          setHasMore(movies.page < movies.total_pages);
+        });
+      }, 1000);
 
-    return <Loading/>
+      return (_) => {
+        clearInterval(timeId);
+      };
+    },
+    [search, page]
+  );
+
+  if (!loading && movies.length === 0) {
+    return <Empty />;
   }
 
   return (
-    <ul className={styles["movies"]}>
-      {movies.map((movie) => (
-        <Card key={movie.id} {...movie} />
-      ))}
-    </ul>
+    <InfiniteScroll
+      dataLength={movies.length}
+      hasMore={hasMore}
+      next={(_) => setPage((prevPage) => prevPage + 1)}
+      loader={<Loading />}
+    >
+      <ul className={styles["movies"]}>
+        {movies.map((movie, i) => (
+          <Card key={`movie-${movie?.id}-${i}`} {...movie} />
+        ))}
+      </ul>
+    </InfiniteScroll>
   );
 };
 

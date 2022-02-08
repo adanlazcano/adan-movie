@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./styles.module.scss";
 import Loading from "components/loading";
+import { getMovieImg } from "hooks/getMovieImg";
 
 const Details = () => {
   const [movie, setMovie] = useState(null);
@@ -10,9 +11,15 @@ const Details = () => {
 
   useEffect(
     (_) => {
-      get(`movie/${id}`).then((movie) => {
-        setMovie(movie);
-      });
+      const timeout = setTimeout((_) => {
+        get(`movie/${id}`).then((movie) => {
+          setMovie(movie);
+        });
+      }, 2000);
+
+      return (_) => {
+        clearTimeout(timeout);
+      };
     },
     [id]
   );
@@ -26,11 +33,8 @@ const Details = () => {
       <img
         width={300}
         height={420}
-        src={
-          movie?.poster_path
-            ? `${process.env.REACT_APP_API_IMG}${movie?.poster_path}`
-            : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
-        }
+        title={movie?.title}
+        src={getMovieImg(movie?.poster_path)}
         alt={movie?.title}
       />
 

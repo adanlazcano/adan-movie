@@ -18,7 +18,7 @@ const Index = () => {
           <Route path="/movie/:id" exact element={<Movie />} />
           <Route path="*" element={<NotFound />} />
         </Route>
-        
+
         {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
     </Router>

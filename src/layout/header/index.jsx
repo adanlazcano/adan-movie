@@ -1,9 +1,10 @@
 import styles from "./styles.module.scss";
 import logo from "./logo.svg";
+import Search from "./search";
 import { NavLink, useParams } from "react-router-dom";
 
 const Index = () => {
-  const {id} = useParams();
+  const { id } = useParams();
 
   return (
     <header className={styles["header"]}>
@@ -13,8 +14,8 @@ const Index = () => {
 
       {!id && (
         <span className={styles["headerSearch"]}>
-          <i className={`bx bx-search ${styles.headerSearchIcon}`}></i>
-          <input placeholder="Search Movies" type="search" />
+          <i className={`bx bx-search ${styles.headerSearchIcon}`} />
+          <Search />
         </span>
       )}
     </header>
