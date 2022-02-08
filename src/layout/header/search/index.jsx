@@ -25,7 +25,7 @@ const Index = () => {
 
   return (
     <input
-      value={search ?? ""}
+      defaultValue={search ?? ""}
       ref={focusRef}
       className={styles.search}
       onChange={handleChange}
